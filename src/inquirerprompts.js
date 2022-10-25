@@ -29,6 +29,7 @@ function getManagerInfo() {
         .then((response) => {
             // add class info
             console.log(response)
+            newEmployee()
         })
 }
 
@@ -98,7 +99,5 @@ function newEmployee() {
 }
 
 // newEmployee()
-module.exports= {
-    getManagerInfo,
-    newEmployee
-}
+
+module.exports=getManagerInfo
