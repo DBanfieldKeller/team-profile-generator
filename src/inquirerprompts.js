@@ -1,9 +1,12 @@
 const inquirer = require('inquirer');
-const employee = require('../lib/employee');
-const manager = require('../lib/manager')
+const Manager = require('../lib/manager');
+const Engineer = require('../lib/engineer');
+const Intern = require('../lib/intern')
+
+let teamArray = []
 
 function getManagerInfo() {
-    inquirer.prompt([
+    return Promise.resolve(inquirer.prompt([
         {
             type: "input",
             message: "Manager name?",
@@ -24,13 +27,7 @@ function getManagerInfo() {
             message: "Manager's office number?",
             name: "officenumber"
         }
-    ])
-
-        .then((response) => {
-            // add class info
-            console.log(response)
-            newEmployee()
-        })
+    ]))
 }
 
 function newEmployee() {
@@ -56,6 +53,11 @@ function newEmployee() {
                     },
                     {
                         type: 'input',
+                        name: 'id',
+                        message: 'Employee ID?'
+                    },
+                    {
+                        type: 'input',
                         name: 'email',
                         message: 'Employee email address?'
                     },
@@ -65,8 +67,7 @@ function newEmployee() {
                         message: "Employee's github user name?",
                     },
                 ]).then((response) => {
-                    console.log(response);
-                    // add class stuff
+                    teamArray.push(new Engineer(response.name, response.id, response.email, response.github))
                     newEmployee()
                 })
             } else if (response.newemployee === 'Intern') {
@@ -75,6 +76,11 @@ function newEmployee() {
                         type: 'input',
                         name: 'name',
                         message: 'Intern name?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'id',
+                        message: "Intern's employee ID?"
                     },
                     {
                         type: 'input',
@@ -87,17 +93,28 @@ function newEmployee() {
                         message: "Intern's school?"
                     }
                 ]) .then((response) =>{
-                    console.log(response);
-                    // class stuff;
+                    teamArray.push(new Intern(response.name, response.id, response.email, response.school))
                     newEmployee();
                 })
             } else {
                 console.log('running html function')
+                console.log(teamArray)
                 // run html function
             }
         });
 }
 
-// newEmployee()
+getManagerInfo()
+.then((response) => {
+    // add class info
+    const teamManager = new Manager(response.name, response.id, response.email, response.officenumber)
+    teamArray.push(teamManager)
+    console.log(teamManager)
+    newEmployee()
+})
 
-module.exports=getManagerInfo
+
+module.exports={
+    getManagerInfo,
+    newEmployee
+}
