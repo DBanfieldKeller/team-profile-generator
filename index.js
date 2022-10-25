@@ -1,7 +1,7 @@
 // dependencies
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {newEmployee, getManagerInfo} = require('./src/inquirerprompts')
+const getManagerInfo = require('./src/inquirerprompts')
 
 // data
 
@@ -11,4 +11,3 @@ const {newEmployee, getManagerInfo} = require('./src/inquirerprompts')
 
 // initialization
 getManagerInfo()
-newEmployee()
