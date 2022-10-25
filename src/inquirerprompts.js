@@ -96,6 +96,9 @@ function newEmployee() {
             }
         });
 }
-// getManagerInfo()
-    // .then((aooke) => console.log(aooke.name))
-newEmployee()
+
+// newEmployee()
+module.exports= {
+    getManagerInfo,
+    newEmployee
+}

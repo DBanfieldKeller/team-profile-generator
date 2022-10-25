@@ -1,6 +1,7 @@
 // dependencies
 const inquirer = require('inquirer');
 const fs = require('fs');
+const {newEmployee, getManagerInfo} = require('./src/inquirerprompts')
 
 // data
 
@@ -9,3 +10,5 @@ const fs = require('fs');
 // user interactions
 
 // initialization
+getManagerInfo()
+newEmployee()
