@@ -104,14 +104,14 @@ function newEmployee() {
         });
 }
 
-getManagerInfo()
-.then((response) => {
-    // add class info
-    const teamManager = new Manager(response.name, response.id, response.email, response.officenumber)
-    teamArray.push(teamManager)
-    console.log(teamManager)
-    newEmployee()
-})
+// getManagerInfo()
+// .then((response) => {
+//     // add class info
+//     const teamManager = new Manager(response.name, response.id, response.email, response.officenumber)
+//     teamArray.push(teamManager)
+//     console.log(teamManager)
+//     newEmployee()
+// })
 
 
 module.exports={
