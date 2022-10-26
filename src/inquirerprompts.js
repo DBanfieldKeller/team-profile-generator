@@ -5,6 +5,8 @@ const Intern = require('../lib/intern')
 
 let teamArray = []
 
+// get manager info
+
 function getManagerInfo() {
     return Promise.resolve(inquirer.prompt([
         {
@@ -30,7 +32,9 @@ function getManagerInfo() {
     ]))
 }
 
+// add new employee
 function newEmployee() {
+    // prompt for new employee type or finish entering employees
     inquirer.prompt([
         {
             type: 'list',
@@ -44,6 +48,7 @@ function newEmployee() {
         }
     ])
         .then((response) => {
+            // prompt for engineer
             if (response.newemployee === 'Engineer') {
                 inquirer.prompt([
                     {
@@ -66,10 +71,12 @@ function newEmployee() {
                         name: 'github',
                         message: "Employee's github user name?",
                     },
+                    // take response and create new engineer, add new engineer to team array and repeat function
                 ]).then((response) => {
                     teamArray.push(new Engineer(response.name, response.id, response.email, response.github))
                     newEmployee()
                 })
+                // prompt for intern
             } else if (response.newemployee === 'Intern') {
                 inquirer.prompt([
                     {
@@ -92,10 +99,12 @@ function newEmployee() {
                         name: 'school',
                         message: "Intern's school?"
                     }
+                    // take responses, make new intern and push to array, repeat new employee function
                 ]) .then((response) =>{
                     teamArray.push(new Intern(response.name, response.id, response.email, response.school))
                     newEmployee();
                 })
+                // end function and run write to HTML function (TODO)
             } else {
                 console.log('running html function')
                 console.log(teamArray)
@@ -104,14 +113,13 @@ function newEmployee() {
         });
 }
 
-// getManagerInfo()
-// .then((response) => {
-//     // add class info
-//     const teamManager = new Manager(response.name, response.id, response.email, response.officenumber)
-//     teamArray.push(teamManager)
-//     console.log(teamManager)
-//     newEmployee()
-// })
+getManagerInfo()
+.then((response) => {
+    const teamManager = new Manager(response.name, response.id, response.email, response.officenumber)
+    teamArray.push(teamManager)
+    console.log(teamManager)
+    newEmployee()
+})
 
 
 module.exports={

@@ -18,4 +18,5 @@ getManagerInfo()
     const teamManager = new Manager(response.name, response.id, response.email, response.officenumber);
     teamArray.push(teamManager)
     console.log(teamArray)
+    newEmployee()
 })
